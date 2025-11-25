@@ -3,7 +3,7 @@
     <div class="container">
       <div class="logo">
         <!-- Le logo sera une image plus tard -->
-        <img src="/logo.png" alt="Cooking Delight Logo" />
+        <img src="../assets/logo.png" alt="Cooking Delight Logo" class="logo"/>
       </div>
 
       <nav class="main-nav">
@@ -23,5 +23,7 @@
 <script setup lang="ts"></script>
 
 <style scoped>
-/* styling soon */
+.logo img {
+  height: 50px;
+}
 </style>
