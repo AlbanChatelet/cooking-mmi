@@ -47,4 +47,26 @@
   justify-content: space-between;
   gap: 32px;
 }
+
+/* NAVIGATION */
+.header-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav a {
+  text-decoration: none;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #4b4b4b;
+}
+
+.header-nav a:hover {
+  color: #000000;
+}
 </style>
