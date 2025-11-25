@@ -69,4 +69,22 @@
 .header-nav a:hover {
   color: #000000;
 }
+
+/* BOUTON SUBSCRIBE */
+.header-cta button {
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: none;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+
+.header-cta button:hover {
+  opacity: 0.9;
+}
+
 </style>
