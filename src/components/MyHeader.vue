@@ -1,21 +1,25 @@
 <template>
   <header>
-    <div class="container">
+    <div class="header-wrapper">
+      <!-- Logo -->
       <div class="logo">
-        <!-- Le logo sera une image plus tard -->
-        <img src="../assets/logo.png" alt="Cooking Delight Logo" class="logo"/>
+        <img src="../assets/logo.png" alt="Cooking MMI Logo" />
       </div>
 
-      <nav class="main-nav">
+      <!-- Navigation -->
+      <nav class="header-nav">
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Recipes</a></li>
-          <li><a href="#">Cooking Tips</a></li>
-          <li><a href="#">About Us</a></li>
+          <li><a href="#">HOME</a></li>
+          <li><a href="#">RECIPES</a></li>
+          <li><a href="#">COOKING TIPS</a></li>
+          <li><a href="#">ABOUT US</a></li>
         </ul>
       </nav>
 
-      <button class="subscribe-btn">Subscribe</button>
+      <!-- Subscribe -->
+      <div class="header-cta">
+        <button>SUBSCRIBE</button>
+      </div>
     </div>
   </header>
 </template>
