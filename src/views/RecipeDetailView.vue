@@ -50,6 +50,15 @@ onMounted(async () => {
       <p v-else-if="error">Erreur : {{ error }}</p>
 
       <div v-else-if="recipe">
+        <img
+  :src="`${API_URL}/images/${recipe.image_url}`"
+  :alt="recipe.title"
+  width="400"
+  @error="(e) => (e.target as HTMLImageElement).src = `https://picsum.photos/seed/recipe-${recipe.recipe_id}/400/260`"
+/>
+
+
+
         <h1>{{ recipe.title }}</h1>
         <p>{{ recipe.description }}</p>
 
