@@ -8,6 +8,8 @@ type Recipe = {
   recipe_id: number
   title: string
   cuisine_name: string | null
+  diet_name: string | null
+  goal_name: string | null
   image_url?: string
 }
 
@@ -30,9 +32,11 @@ onMounted(async () => {
   }
 })
 
-/* --- Recherche + filtrage --- */
-const selectedCuisine = ref('all')
+/* --- Filtres --- */
 const searchQuery = ref('')
+const selectedCuisine = ref('all')
+const selectedDiet = ref('all')
+const selectedGoal = ref('all')
 
 const cuisines = computed(() => {
   const set = new Set<string>()
@@ -42,17 +46,38 @@ const cuisines = computed(() => {
   return Array.from(set).sort()
 })
 
+const diets = computed(() => {
+  const set = new Set<string>()
+  for (const r of recipes.value) {
+    if (r.diet_name) set.add(r.diet_name)
+  }
+  return Array.from(set).sort()
+})
+
+const goals = computed(() => {
+  const set = new Set<string>()
+  for (const r of recipes.value) {
+    if (r.goal_name) set.add(r.goal_name)
+  }
+  return Array.from(set).sort()
+})
+
 const filteredRecipes = computed(() => {
   const q = searchQuery.value.trim().toLowerCase()
 
   return recipes.value.filter((r) => {
+    const matchesSearch = q === '' || r.title.toLowerCase().includes(q)
+
     const matchesCuisine =
       selectedCuisine.value === 'all' || r.cuisine_name === selectedCuisine.value
 
-    const matchesSearch =
-      q === '' || r.title.toLowerCase().includes(q)
+    const matchesDiet =
+      selectedDiet.value === 'all' || r.diet_name === selectedDiet.value
 
-    return matchesCuisine && matchesSearch
+    const matchesGoal =
+      selectedGoal.value === 'all' || r.goal_name === selectedGoal.value
+
+    return matchesSearch && matchesCuisine && matchesDiet && matchesGoal
   })
 })
 </script>
@@ -73,14 +98,10 @@ const filteredRecipes = computed(() => {
             <!-- Recherche -->
             <label>
               Recherche :
-              <input
-                v-model="searchQuery"
-                type="text"
-                placeholder="Ex: chicken..."
-              />
+              <input v-model="searchQuery" type="text" placeholder="Ex: chicken..." />
             </label>
 
-            <!-- Filtre cuisine -->
+            <!-- Cuisine -->
             <label>
               Cuisine :
               <select v-model="selectedCuisine">
@@ -91,16 +112,33 @@ const filteredRecipes = computed(() => {
               </select>
             </label>
 
+            <!-- Diet -->
+            <label>
+              Diet :
+              <select v-model="selectedDiet">
+                <option value="all">Toutes</option>
+                <option v-for="d in diets" :key="d" :value="d">
+                  {{ d }}
+                </option>
+              </select>
+            </label>
+
+            <!-- Goal -->
+            <label>
+              Goal :
+              <select v-model="selectedGoal">
+                <option value="all">Tous</option>
+                <option v-for="g in goals" :key="g" :value="g">
+                  {{ g }}
+                </option>
+              </select>
+            </label>
+
             <!-- Aucun résultat -->
-            <p v-if="filteredRecipes.length === 0">
-              Aucune recette trouvée.
-            </p>
+            <p v-if="filteredRecipes.length === 0">Aucune recette trouvée.</p>
 
             <!-- Liste filtrée -->
-            <RecipeList
-              v-else
-              :recipes="filteredRecipes"
-            />
+            <RecipeList v-else :recipes="filteredRecipes" />
           </div>
         </div>
       </section>
