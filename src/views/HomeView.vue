@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Footer from '@/components/MyFooter.vue'
 import Header from '@/components/MyHeader.vue'
+import RecipeList from '@/components/RecipeList.vue'
 
 import { onMounted, ref } from 'vue'
 
@@ -47,11 +48,8 @@ onMounted(async () => {
       <p v-if="loading">Chargement...</p>
       <p v-else-if="error">Erreur : {{ error }}</p>
 
-      <ul v-else>
-        <li v-for="r in recipes" :key="r.recipe_id">
-          <strong>{{ r.title }}</strong> — {{ r.cuisine_name }}
-        </li>
-      </ul>
+      <RecipeList :recipes="recipes" />
+
     </section>
 
     <Footer />
