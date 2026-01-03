@@ -30,8 +30,9 @@ onMounted(async () => {
   }
 })
 
-/* --- Filtrage par cuisine --- */
+/* --- Recherche + filtrage --- */
 const selectedCuisine = ref('all')
+const searchQuery = ref('')
 
 const cuisines = computed(() => {
   const set = new Set<string>()
@@ -42,8 +43,17 @@ const cuisines = computed(() => {
 })
 
 const filteredRecipes = computed(() => {
-  if (selectedCuisine.value === 'all') return recipes.value
-  return recipes.value.filter((r) => r.cuisine_name === selectedCuisine.value)
+  const q = searchQuery.value.trim().toLowerCase()
+
+  return recipes.value.filter((r) => {
+    const matchesCuisine =
+      selectedCuisine.value === 'all' || r.cuisine_name === selectedCuisine.value
+
+    const matchesSearch =
+      q === '' || r.title.toLowerCase().includes(q)
+
+    return matchesCuisine && matchesSearch
+  })
 })
 </script>
 
@@ -60,7 +70,17 @@ const filteredRecipes = computed(() => {
           <p v-else-if="error">Erreur : {{ error }}</p>
 
           <div v-else>
-            <!-- Filtre -->
+            <!-- Recherche -->
+            <label>
+              Recherche :
+              <input
+                v-model="searchQuery"
+                type="text"
+                placeholder="Ex: chicken..."
+              />
+            </label>
+
+            <!-- Filtre cuisine -->
             <label>
               Cuisine :
               <select v-model="selectedCuisine">
@@ -71,8 +91,16 @@ const filteredRecipes = computed(() => {
               </select>
             </label>
 
+            <!-- Aucun résultat -->
+            <p v-if="filteredRecipes.length === 0">
+              Aucune recette trouvée.
+            </p>
+
             <!-- Liste filtrée -->
-            <RecipeList :recipes="filteredRecipes" />
+            <RecipeList
+              v-else
+              :recipes="filteredRecipes"
+            />
           </div>
         </div>
       </section>
