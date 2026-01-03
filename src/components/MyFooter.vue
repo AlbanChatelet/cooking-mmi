@@ -1,35 +1,20 @@
 <template>
-  <footer class="site-footer">
-    <div class="footer-wrapper">
-      <nav class="footer-nav">
-        <ul>
-          <li><a href="#">HOME</a></li>
-          <li><a href="#">RECIPES</a></li>
-          <li><a href="#">COOKING TIPS</a></li>
-          <li><a href="#">ABOUT US</a></li>
+  <footer class="c-footer">
+    <div class="l-container c-footer__inner">
+      <nav class="c-footer__nav">
+        <ul class="c-footer__list">
+          <li><RouterLink class="c-footer__link" to="/">HOME</RouterLink></li>
+          <li><RouterLink class="c-footer__link" to="/recipes">RECIPES</RouterLink></li>
+          <li><a class="c-footer__link" href="#">COOKING TIPS</a></li>
+          <li><RouterLink class="c-footer__link" to="/about">ABOUT US</RouterLink></li>
         </ul>
       </nav>
 
-      <hr />
+      <hr class="c-footer__rule" />
 
-      <p class="copyright">© 2024 COOKING MMI.</p>
+      <p class="c-footer__copy">© 2024 COOKING MMI.</p>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts"></script>
-
-<style scoped>
-.site-footer {
-  background-color: #1d1b18; /* noir légèrement teinté */
-  color: #e8e6e3; /* blanc/beige doux comme la maquette */
-  padding: 40px 20px;
-  width: 100%;
-}
-
-.footer-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
-}
-</style>

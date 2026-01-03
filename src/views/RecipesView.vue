@@ -8,6 +8,7 @@ type Recipe = {
   recipe_id: number
   title: string
   cuisine_name: string | null
+  image_url?: string
 }
 
 const recipes = ref<Recipe[]>([])
@@ -20,11 +21,7 @@ onMounted(async () => {
   try {
     const res = await fetch(`${API_URL}/api/recipes`)
     const json = await res.json()
-
-    if (!json.success) {
-      throw new Error(json.error || 'API error')
-    }
-
+    if (!json.success) throw new Error(json.error || 'API error')
     recipes.value = json.data
   } catch (e) {
     error.value = e instanceof Error ? e.message : 'Unknown error'
@@ -35,17 +32,21 @@ onMounted(async () => {
 </script>
 
 <template>
-  <main>
+  <main class="l-page">
     <Header />
 
-    <section style="padding: 24px;">
-      <h1>Recipes</h1>
+    <div class="l-main">
+      <section class="l-section">
+        <div class="l-container">
+          <h1 class="u-title">Recipes</h1>
 
-      <p v-if="loading">Chargement...</p>
-      <p v-else-if="error">Erreur : {{ error }}</p>
+          <p v-if="loading" class="u-muted">Chargement...</p>
+          <p v-else-if="error">Erreur : {{ error }}</p>
 
-      <RecipeList v-else :recipes="recipes" />
-    </section>
+          <RecipeList v-else :recipes="recipes" />
+        </div>
+      </section>
+    </div>
 
     <Footer />
   </main>
