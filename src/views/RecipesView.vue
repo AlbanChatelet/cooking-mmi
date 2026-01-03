@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import Header from '@/components/MyHeader.vue'
 import Footer from '@/components/MyFooter.vue'
 import RecipeList from '@/components/RecipeList.vue'
@@ -29,6 +29,22 @@ onMounted(async () => {
     loading.value = false
   }
 })
+
+/* --- Filtrage par cuisine --- */
+const selectedCuisine = ref('all')
+
+const cuisines = computed(() => {
+  const set = new Set<string>()
+  for (const r of recipes.value) {
+    if (r.cuisine_name) set.add(r.cuisine_name)
+  }
+  return Array.from(set).sort()
+})
+
+const filteredRecipes = computed(() => {
+  if (selectedCuisine.value === 'all') return recipes.value
+  return recipes.value.filter((r) => r.cuisine_name === selectedCuisine.value)
+})
 </script>
 
 <template>
@@ -43,7 +59,21 @@ onMounted(async () => {
           <p v-if="loading" class="u-muted">Chargement...</p>
           <p v-else-if="error">Erreur : {{ error }}</p>
 
-          <RecipeList v-else :recipes="recipes" />
+          <div v-else>
+            <!-- Filtre -->
+            <label>
+              Cuisine :
+              <select v-model="selectedCuisine">
+                <option value="all">Toutes</option>
+                <option v-for="c in cuisines" :key="c" :value="c">
+                  {{ c }}
+                </option>
+              </select>
+            </label>
+
+            <!-- Liste filtrée -->
+            <RecipeList :recipes="filteredRecipes" />
+          </div>
         </div>
       </section>
     </div>
