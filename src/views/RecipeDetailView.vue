@@ -20,10 +20,12 @@ const recipe = ref<Recipe | null>(null)
 const error = ref<string | null>(null)
 const loading = ref(true)
 
+const API_URL = import.meta.env.VITE_API_URL
+
 onMounted(async () => {
   try {
     const id = route.params.id
-    const res = await fetch(`http://localhost:3000/api/recipes/${id}`)
+    const res = await fetch(`${API_URL}/api/recipes/${id}`)
     const json = await res.json()
 
     if (!json.success) {

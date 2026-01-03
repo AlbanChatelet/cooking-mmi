@@ -16,9 +16,11 @@ export function useRecipes() {
   const error = ref<string | null>(null)
   const loading = ref(true)
 
+  const API_URL = import.meta.env.VITE_API_URL
+
   onMounted(async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/recipes')
+      const res = await fetch(`${API_URL}/api/recipes`)
       const json = await res.json()
 
       if (!json.success) {
