@@ -8,15 +8,11 @@ import Footer from '@/components/MyFooter.vue'
     <Header />
 
     <section style="padding: 24px;">
-      <h1>About</h1>
+      <h1>404</h1>
+      <p>Cette page n’existe pas.</p>
 
       <p>
-        Cooking MMI is a simple recipe project made to practice Vue, routing,
-        and API integration.
-      </p>
-
-      <p>
-        <RouterLink to="/recipes">Browse recipes</RouterLink>
+        <RouterLink to="/">Retour à l’accueil</RouterLink>
       </p>
     </section>
 
