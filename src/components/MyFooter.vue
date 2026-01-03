@@ -20,4 +20,16 @@
 <script setup lang="ts"></script>
 
 <style scoped>
+.site-footer {
+  background-color: #1d1b18; /* noir légèrement teinté */
+  color: #e8e6e3; /* blanc/beige doux comme la maquette */
+  padding: 40px 20px;
+  width: 100%;
+}
+
+.footer-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
 </style>
