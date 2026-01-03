@@ -1,15 +1,25 @@
-<template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
-</template>
+<script setup lang="ts">
+import Header from '@/components/MyHeader.vue'
+import Footer from '@/components/MyFooter.vue'
+</script>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<template>
+  <main>
+    <Header />
+
+    <section style="padding: 24px;">
+      <h1>About</h1>
+
+      <p>
+        Cooking MMI is a simple recipe project made to practice Vue, routing,
+        and API integration.
+      </p>
+
+      <p>
+        <RouterLink to="/recipes">Browse recipes</RouterLink>
+      </p>
+    </section>
+
+    <Footer />
+  </main>
+</template>

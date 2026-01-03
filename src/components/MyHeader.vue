@@ -9,10 +9,10 @@
       <!-- Navigation -->
       <nav class="header-nav">
         <ul>
-          <li><a href="#">HOME</a></li>
-          <li><a href="/RecipesView">RECIPES</a></li>
+          <li><a href="/">HOME</a></li>
+          <li><RouterLink to="/recipes">RECIPES</RouterLink></li>
           <li><a href="#">COOKING TIPS</a></li>
-          <li><a href="/AboutView">ABOUT US</a></li>
+          <li><RouterLink to="/about">ABOUT US</RouterLink></li>
         </ul>
       </nav>
 
